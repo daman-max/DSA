@@ -67,6 +67,74 @@ class LinkedList{
         temp->next = newNode;
         
     }
+    
+    void deleteAtBeg(){
+        if (head == NULL) {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+            return;
+    }
+
+    void deleteAtLast() {
+        if (head == NULL) {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+        if (head->next == NULL) {
+            delete head;
+            head = NULL;
+            return;
+        }
+
+        Node* temp = head;
+        while (temp->next->next != NULL) {
+            temp = temp->next;
+        }
+
+        Node* lastNode = temp->next;
+        temp->next = NULL;
+        delete lastNode;
+    }
+
+    void deleteAtPosition(int pos) {
+        if (head == NULL) {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+        if (pos <= 0) {
+            cout << "Invalid position" << endl;
+            return;
+        }
+
+        if (pos == 1) {
+            deleteAtBeg(); 
+            return;
+        }
+
+        Node* temp = head;
+
+    
+        for (int i = 1; i < pos - 1 && temp->next != NULL; i++) {
+            temp = temp->next;
+        }
+
+        if (temp->next == NULL) {
+            cout << "Position out of bounds" << endl;
+            return;
+        }
+
+        Node* posDel = temp->next;
+        temp->next = posDel->next; 
+        delete posDel;
+}
+
 
     void display(){
         Node* temp = head;
@@ -105,6 +173,9 @@ int main() {
     list.inserAtBegining(33);
     list.insertAtLast(5);
     list.insertAtPosition(50,2);
+    list.deleteAtBeg();
+    list.deleteAtLast();
+    list.deleteAtPosition(3);
     list.display();
 
 }
