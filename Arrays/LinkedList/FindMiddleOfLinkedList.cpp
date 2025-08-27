@@ -72,21 +72,6 @@ public:
 
     }
 
-    // void pop_back(){
-    //     if (head==NULL){
-    //         cout << "Linked List is empty " << endl;
-    //         return;
-    //     }
-    //     Node* temp = head;
-    //     while (temp->next != NULL){
-    //         temp = temp->next;
-    //     }
-    //     temp->next = NULL;
-    //     delete tail;
-    //     tail = temp;
-    // }
-
-
     void reverseList(){
             if (head == NULL) {
             cout << "List is empty" << endl;
@@ -112,6 +97,43 @@ public:
 
     }
 
+//  if there are 4 even elements in code and you want 3rd element as middle than use this code 
+//  otherwise use next code it will give 2nd element as middle there and also gives first middle elment in case of even numbers 
+
+    // int findMiddle(){
+    //     if(head==NULL){
+    //         return 0;
+    //     }
+
+    //     Node *fast=head;
+    //     Node *slow=head;
+
+    //     while(fast!=NULL && fast->next!=NULL){
+    //         slow = slow->next;
+    //         fast = fast->next->next;
+
+    //     }
+
+    //     return slow->data;
+    // }
+
+    int findMiddle(){
+        if(head==NULL){
+            return 0;
+        }
+
+        Node *fast=head;
+        Node *slow=head;
+
+        while(fast->next && fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
+
+        }
+
+        return slow->data;
+    }
+
 
     void printLL() {
         Node* temp = head;
@@ -130,8 +152,9 @@ int main() {
     l.push_back(22);
     l.push_back(25);
     l.pop_front();
+    l.push_front(11);
+    l.push_back(9);
     l.printLL();
-    l.reverseList();
-    l.printLL();
+    cout<<l.findMiddle();
     return 0;
 }
