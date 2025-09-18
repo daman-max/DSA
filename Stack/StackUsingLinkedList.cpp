@@ -23,6 +23,15 @@ class MyStack{
         size = 0;
     }
 
+    ~MyStack(){
+        while(!isEmpty()){
+            int PoppedValue = top->data;
+            Node* temp = top;
+            top = top->next;
+            delete temp;
+        }
+    }
+
     void push(int value){
         Node* newNode = new Node(value);
         newNode->next = top; //new node points to the old top
