@@ -33,6 +33,7 @@ class Queue{
         if(rear==NULL){
             rear=front=newNode;
             count++;
+            return ;
         }
 
         rear->next = newNode;
