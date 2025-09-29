@@ -43,7 +43,7 @@ int RecursiveBinarySearch(int arr[],int low,int high,int target){
 
 
 int main(){
-    int n = 14;
+    const int n = 14;
     int arr[n]={1,2,4,8,9,12,14,16,18,19,21,27,31,39};
     int target = 18;
 

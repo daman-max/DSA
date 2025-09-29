@@ -27,7 +27,7 @@ void quickSort(int arr[],int low,int high){
 }
 
 int main(){
-    int N=8;
+    const int N=8;
     int arr[N]={2,8,7,1,3,5,6,4};
 
     cout << "Original array: ";

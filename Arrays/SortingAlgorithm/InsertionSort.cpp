@@ -20,7 +20,7 @@ void insertionSort(int arr[],int n){
 }
 
 int main(){
-    int n = 5;
+    const int n = 5;
     int arr[n]={5,3,8,4,2};
 
     insertionSort(arr,n);

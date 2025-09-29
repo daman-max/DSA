@@ -27,7 +27,7 @@ void bubblesort(int arr[],int n){
 }
 
 int main(){
-    int n=6;
+    const int n=6;
     int arr[n]={1,2,3,4,5,6};
     int arr2[n]={5,3,8,2,4,2};
 
