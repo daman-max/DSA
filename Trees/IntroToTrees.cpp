@@ -1,23 +1,18 @@
-// Trees are Non-Linear --> Has more than one branch 
-// Operations --> Insertion , Searching , Traversal 
-// Algo --> {Preorder , In-order , Post-order}->DFS(Depth First Search) , {Level-order}->BFS(Breadth First Search)
-// Binary Trees->At most 2 Nodes
-
 #include<iostream>
 #include<vector>
+#include<queue>
 using namespace std;
 
 class Node{
     public:
     int data;
     Node* left;
-    Node* right;
+    Node* Right;
 
-    Node(int value){
-        data = value;
+    Node(int val){
+        data = val;
         left = NULL;
-        right = NULL;
-    
+        Right = NULL;
     }
 };
 
@@ -25,62 +20,99 @@ static int idx = -1;
 
 Node* buildtree(vector<int> preorder){
     idx++;
-    if(preorder[idx]==-1){
-        return NULL;
-    }
 
-    Node *root = new Node(preorder[idx]);
+    if(preorder[idx]==-1) return NULL;
+    Node* root = new Node(preorder[idx]);
+
     root->left = buildtree(preorder);
-    root->right = buildtree(preorder);
-
+    root->Right = buildtree(preorder);
     return root;
-};
 
-void preOrderTraversal(Node* root){
-    if(root==NULL){
-        return;
-    }
+}
 
+//Preorder traversal
+
+void preOrder(Node* root){
+    //first root - left - right
+
+    if(root == NULL) return;
     cout<<root->data<<" ";
-    preOrderTraversal(root->left);
-    preOrderTraversal(root->right);
-};
+    preOrder(root->left);
+    preOrder(root->Right);
+}
 
-void inOrderTraversal(Node* root){
-    if(root==NULL){
-        return;
-    }
+//Inorder traversal
 
-    inOrderTraversal(root->left);
+void inOrder(Node* root){
+    //firt left - root - right
+
+    if(root==NULL) return;
+    inOrder(root->left);
     cout<<root->data<<" ";
-    inOrderTraversal(root->right);
-};
+    inOrder(root->Right);
+}
 
-void postOrderTraversal(Node* root){
-    if(root==NULL){
-        return;
-    }
+//Postorder traversal
 
-    postOrderTraversal(root->left);
-    postOrderTraversal(root->right);
+void postOrder(Node* root){
+    //first left - right - root
+    if (root==NULL) return ;
+    postOrder(root->left);
+    postOrder(root->Right);
     cout<<root->data<<" ";
 }
+
+// Level Order Traversal -> {DFS(Depth First Search)->like post order, inorder, preorder}, BFS(Breadth First Search)
+
+void LevelOrder(Node* root){
+    queue<Node*> q;
+
+    q.push(root);
+    q.push(NULL);
+
+    while(q.size()>0){
+        Node* curr = q.front();
+        q.pop();
+
+        if(curr==NULL){
+            if(!q.empty()){
+                cout<<endl;
+                q.push(NULL);
+                continue;
+            }else{
+                break;
+            }
+        }
+
+        cout<<curr->data<<" ";
+
+        if(curr->left!=NULL){
+            q.push(curr->left);
+        }
+
+        if(curr->Right!=NULL){
+            q.push(curr->Right);
+        }
+    }
+
+    cout<<endl;
+}
+
 
 int main(){
 
     vector<int> preorder = {1,2,-1,-1,3,4,-1,-1,5,-1,-1};
+
     Node* root = buildtree(preorder);
+    preOrder(root);
+    cout<<endl;
+    inOrder(root);
+    cout<<endl;
+    postOrder(root);
+    cout<<endl;
+    LevelOrder(root);
 
-    cout << "Preorder Traversal: ";
-    preOrderTraversal(root);
-    cout << endl;
+    return 0;
 
-    cout << "Inorder Traversal: ";
-    inOrderTraversal(root);
-    cout << endl;
-
-    cout << "Postorder Traversal: ";
-    postOrderTraversal(root);
-    cout << endl;
-
+    
 }
